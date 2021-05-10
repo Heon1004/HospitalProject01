@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.reserve {box-sizing:border-box;}
+    table {margin:0 auto;width:1000px;border-spacing:0;border-collapse:collapse;}
+    table thead th {border:1px solid black;}
+    table tbody th {height:24px;border:1px solid black;}
+    table tbody td {padding:3px 0;height:26px;border:1px solid black;}
+    table tbody td .graph_bg {display:block;width:100%;height:100%;background-color:pink;}
+.serachform{
+	text-align: center;
+	padding: 10px;
+}
+.reserve{
+	text-align: center;
+}

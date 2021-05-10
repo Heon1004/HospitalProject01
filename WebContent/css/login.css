@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+h2 {
+	text-align: center;
+}
+
+dl {
+	width: 500px;
+	border-top: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	margin-left: auto;
+ 	margin-right: auto;
+}
+
+dl dt {
+	float: left;
+	padding: 1em;
+	color: #998484;
+}
+
+dl dd {
+	border-bottom: 1px solid #cccccc;
+	margin: 0;
+	padding: 1em 0 1em 18em;
+}
+
+.login{
+	width : 200px ;
+	height : 30px ;
+	
+}
+
+p.submit {
+	text-align: center;
+}
+
+input[type="submit"] {
+	padding: 20px 100px;
+	background: #7f6666;
+	color: #ffffff;
+	font-weight: bold;
+	border-radius: 10px;
+	cursor: pointer;
+}
+input[type="submit"]:hover {
+	opacity: 0.8;
+}
+
+.link-link,.link{
+	font-size: 12px;
+	text-align: center;
+	color: blue;
+	
+}
