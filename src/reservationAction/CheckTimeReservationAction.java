@@ -3,6 +3,7 @@ package reservationAction;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,13 +15,13 @@ import javax.servlet.http.HttpSession;
 
 import model.ReservationDAO;
 
-@WebServlet("/reservationInfoAction")
-public class ReservationInfoAction extends HttpServlet{
+@WebServlet("/checkTimeReservationAction")
+public class CheckTimeReservationAction extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		ArrayList<String>infolist = new ArrayList<String>();
-		HttpSession session = request.getSession(false);
+		List<String>infolist = new ArrayList<String>();
+		HttpSession session = request.getSession(true);
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
@@ -32,7 +33,7 @@ public class ReservationInfoAction extends HttpServlet{
 			
 			
 			ReservationDAO dao = new ReservationDAO(); 
-			infolist = dao.reserveInfo(date, medicine); //DateTimeを全部入れる
+			infolist = dao.reserveCheckList(date, medicine); //DateTimeを全部入れる
 			//何時に予約があるか分別
 			
 			String[] time = TimeCheck.timeCheck(infolist);
@@ -43,7 +44,7 @@ public class ReservationInfoAction extends HttpServlet{
 			session.setAttribute("time", time);
 			request.setAttribute("fulldate", fulldate); //予約する時のActionページで必要。年度を指定するため
 			request.setAttribute("medicine", medicine);	//予約する時診察科コードを引き渡すため
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/reservationform.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/Member/Reserve/ReservationForm.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			out.println("<script>");

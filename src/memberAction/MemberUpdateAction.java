@@ -51,7 +51,7 @@ public class MemberUpdateAction extends HttpServlet{
 				if(result != -1) {
 					user = dao.getUser(user.getUserID()); //既にuserIDは持ってるし、変えることが出来ない為??05/09:もう一度確認すこと
 					session.setAttribute("user",user);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 					dispatcher.forward(request, response);
 				}else {
 					out.println("<script>");

@@ -42,7 +42,7 @@ public class MemberLoginAction extends HttpServlet{
 				}else {
 					user = dao.getUser(userID);
 					session.setAttribute("user",user);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 					dispatcher.forward(request, response);
 				}
 			}catch(Exception e) {

@@ -15,25 +15,28 @@
 </head>
 <body class="home">
 	<header>
-	<h1><a href="index.jsp">キム病院</a></h1>
+	<h1><a href="main.jsp">キム病院</a></h1>
 		<nav>
 			<ul>
-				<li><a href="index.jsp">ホーム</a></li>
+				<li><a href="main.jsp">ホーム</a></li>
 				<li><a href="#">病院について</a></li>
 				<li><a href="#">診察科・部門一覧</a></li>
-				<li><a href="#">予約</a></li>
+				<li><a href="./view?display=CheckTimeReservationForm">予約</a></li>
+				<c:if test="${!empty user }">
+				<li><a href="./view?display=CheckMyReservationForm">予約確認</a></li>
+				</c:if>
 				<li><a href="#">交通のご案内</a></li>
 			</ul>
 			<div class="dropdown">
 				<button class="drop-btn">Menu</button>
 				<div class="dropdown-content">
 					<c:if test="${empty user }">
-					<a href="./view?display=loginform">ログリン</a>
-					<a href="./view?display=joinform">会員登録</a>
+					<a href="./view?display=loginForm">ログリン</a>
+					<a href="./view?display=joinForm">会員登録</a>
 					</c:if>
 					<c:if test="${!empty user}">
-					<a href="./view?display=logoutform">ログアウト</a>
-					<a href="./view?display=myprofileform">マイページ</a>
+					<a href="./view?display=logoutForm">ログアウト</a>
+					<a href="./view?display=myprofileForm">マイページ</a>
 					</c:if>
 				</div>
 			</div>
@@ -85,13 +88,15 @@
 					電話番号<span class="must">必須</span>
 				</dt>
 				<dd>
-					<input type="tel" name="userTel" required placeholder="電話番号" />
+					<input type="text" name="userTel" required placeholder="電話番号" 
+					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 				</dd>
 				<dt>
 					生年月日<span class="must">必須</span>
 				</dt>
 				<dd>
-					<input type="text" name="yy" maxlength="4" placeholder="年度">
+					<input type="text" name="yy" maxlength="4" placeholder="年度"
+					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 					<select name="mm">
 						<option>月</option>
 						<option value="01">1</option>
@@ -107,7 +112,8 @@
 						<option value="11">11</option>
 						<option value="12">12</option>
 					</select> 
-					<input type="text" name="dd"maxlength="2" placeholder="日">
+					<input type="text" name="dd"maxlength="2" placeholder="日"
+					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 				</dd>
 			</dl>
 			<p class="submit"><input type="submit" value="会員登録"/></p>

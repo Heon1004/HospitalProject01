@@ -49,7 +49,7 @@ public class MemberJoinAction extends HttpServlet{
 		}else {
 			try {
 				dao.join(user);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/loginform.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/loginForm.jsp");
 				dispatcher.forward(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();

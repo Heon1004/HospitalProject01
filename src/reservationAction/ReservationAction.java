@@ -28,8 +28,6 @@ public class ReservationAction extends HttpServlet{
 		
 		ReservationBean reservation = new ReservationBean();
 		ReservationDAO dao = new ReservationDAO();
-		ArrayList<ReservationBean> reservationList = new ArrayList<ReservationBean>();
-		
 		UserBean user = (UserBean) session.getAttribute("user");
 		String time = TimeCheck.timeSet(request.getParameter("checked")); //inputの値を時間に変換させる
 		String date = request.getParameter("fulldate").substring(0,10) +" "+ time; //YY-MM-DD,Time空白はないため " "追加
@@ -60,7 +58,7 @@ public class ReservationAction extends HttpServlet{
 					out.println("history.back();");
 					out.println("</script>");
 				}else {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");//後でここには予約状況確認ページへ
+					RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 					dispatcher.forward(request, response);
 				}
 			}

@@ -56,7 +56,6 @@ public class UserDAO {
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-
 			pstmt.setString(1, user.getUserPW());
 			pstmt.setString(2, user.getUserName());
 			pstmt.setString(3, user.getHiragana());

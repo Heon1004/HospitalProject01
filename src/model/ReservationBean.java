@@ -12,10 +12,6 @@ public class ReservationBean {
 	private String date;
 	private int available;
 	
-	public String getMedicineName(MedicineBean medicine) {
-		return medicine.getMedicineName();
-	}
-	
 	public int getNumber() {
 		return number;
 	}

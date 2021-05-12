@@ -14,7 +14,7 @@
 <%
     HttpSession userSession = request.getSession();
     userSession.invalidate();
-    out.println("<script>location.href = 'index.jsp';</script>");
+    out.println("<script>location.href = 'main.jsp';</script>");
 %>
 
 </body>

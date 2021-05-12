@@ -12,50 +12,56 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/view")
 public class View extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request,response);
+		doPost(request, response);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String display = request.getParameter("display");
+		System.out.println(display);
 		String page = "/WEB-INF/view/";
-		
-		switch(display) {
-		case "joinform":
-			page += "joinform.jsp";
+
+		switch (display) {
+		case "joinForm":
+			page += "joinForm.jsp";
 			break;
-		case "loginform":
-			page += "loginform.jsp";
+		case "loginForm":
+			page += "loginForm.jsp";
 			break;
-			
-		case "logoutform":
-			page += "logoutform.jsp";
+		case "logoutForm":
+			page += "logoutForm.jsp";
 			break;
-		case "myprofileform":
-			page += "myprofileform.jsp";
+
+		// Member
+		case "myprofileForm":
+			page += "Member/myprofileForm.jsp";
 			break;
-		case "myprofileUpdateform":
-			page+= "myprofileUpdateform.jsp";
+		case "myprofileUpdateForm":
+			page += "Member/myprofileUpdateForm.jsp";
 			break;
-		case "reservationInfoform":
-			page += "reservationInfoform.jsp";
+
+		// Member Reservation
+		case "CheckTimeReservationForm":
+			page += "Member/Reserve/CheckTimeReservationForm.jsp";
 			break;
-		case "reservationform":
-			page += "reservationform.jsp";
+		case "ReservationForm":
+			page += "Member/Reserve/ReservationForm.jsp";
 			break;
-		case "checkReservationform":
-			page += "checkReservationform.jsp";
+		// Member MyReservation
+		case "CheckMyReservationForm":
+			page += "Member/UpdateReserve/CheckMyReservationForm.jsp";
 			break;
-			
-			default:
-				page = "index.jsp";
-				break;
+
+		default:
+			page = "main.jsp";
+			break;
 		}
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}

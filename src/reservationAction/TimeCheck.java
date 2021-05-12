@@ -1,9 +1,9 @@
 package reservationAction;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TimeCheck {
-	public static String[] timeCheck(ArrayList<String> infolist) {
+	public static String[] timeCheck(List<String> infolist) {
 		String[] time = new String[20];
 		String check;
 		for (int i = 0; i < infolist.size(); i++) {

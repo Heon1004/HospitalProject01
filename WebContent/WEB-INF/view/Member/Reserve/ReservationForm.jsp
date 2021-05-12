@@ -13,26 +13,28 @@
 </head>
 <body class="home">
 	<header>
-	<h1><a href="index.jsp">キム病院</a></h1>
+	<h1><a href="main.jsp">キム病院</a></h1>
 		<nav>
 			<ul>
-				<li><a href="index.jsp">ホーム</a></li>
+				<li><a href="main.jsp">ホーム</a></li>
 				<li><a href="#">病院について</a></li>
 				<li><a href="#">診察科・部門一覧</a></li>
-				<li><a href="./view?display=reservationInfoform">予約</a></li>
-				<li><a href="./view?display=checkReservationform">予約確認</a></li>
+				<li><a href="./view?display=CheckTimeReservationForm">予約</a></li>
+				<c:if test="${!empty user }">
+				<li><a href="./view?display=CheckMyReservationForm">予約確認</a></li>
+				</c:if>
 				<li><a href="#">交通のご案内</a></li>
 			</ul>
 			<div class="dropdown">
 				<button class="drop-btn">Menu</button>
 				<div class="dropdown-content">
 					<c:if test="${empty user }">
-					<a href="./view?display=loginform">ログリン</a>
-					<a href="./view?display=joinform">会員登録</a>
+					<a href="./view?display=loginForm">ログリン</a>
+					<a href="./view?display=joinForm">会員登録</a>
 					</c:if>
 					<c:if test="${!empty user}">
-					<a href="./view?display=logoutform">ログアウト</a>
-					<a href="./view?display=myprofileform">マイページ</a>
+					<a href="./view?display=logoutForm">ログアウト</a>
+					<a href="./view?display=myprofileForm">マイページ</a>
 					</c:if>
 				</div>
 			</div>
@@ -40,7 +42,7 @@
 	</header>
 	<main>
 	<div class="reserve">
-	<form action="reservationInfoAction" method="POST" class="serachform">
+	<form action="checkTimeReservationAction" method="POST" class="serachform">
 		<input type='date' name="date" id='currentDate' value="${fulldate }" min="today"/>
 		<script>
 			let [today] = new Date().toISOString().split("T");
@@ -48,11 +50,43 @@
 		</script>
 		<select name="medicine">
 			<option disabled>診察科</option>
-			<option selected value="0">相談</option>
-			<option value="1">外科</option>
-			<option value="2">内科</option>
-			<option value="3">整形外科</option>
-			<option value="4">眼科</option>
+			<c:choose>
+				<c:when test="${medicine eq 0 }">
+					<option value="0" selected>相談</option>
+					<option value="1" >外科</option>
+					<option value="2" >内科</option>
+					<option value="3" >整形外科</option>
+					<option value="4" >眼科</option>
+				</c:when>
+				<c:when test="${medicine eq 1 }">
+					<option value="0" >相談</option>
+					<option value="1" selected>外科</option>
+					<option value="2" >内科</option>
+					<option value="3" >整形外科</option>
+					<option value="4" >眼科</option>
+				</c:when>
+				<c:when test="${medicine eq 2 }">
+				<option value="0" >相談</option>
+					<option value="1" >外科</option>
+					<option value="2" selected>内科</option>
+					<option value="3" >整形外科</option>
+					<option value="4" >眼科</option>
+				</c:when>
+				<c:when test="${medicine eq 3 }">
+					<option value="0" >相談</option>
+					<option value="1" >外科</option>
+					<option value="2" >内科</option>
+					<option value="3" selected>整形外科</option>
+					<option value="4" >眼科</option>
+				</c:when>
+				<c:otherwise>
+					<option value="0" >相談</option>
+					<option value="1" >外科</option>
+					<option value="2" >内科</option>
+					<option value="3" >整形外科</option>
+					<option value="4" selected>眼科</option>
+				</c:otherwise>
+			</c:choose>
 		</select>
 		<input type="submit" value="検索"/>
 	</form>
@@ -81,7 +115,7 @@
 					<th rowspan="2">${date} </th>
 					<c:forEach var="n" items="${time }" >
 							<c:if test="${empty n}">
-								<th>可</th> <!-- 文字のせいで一旦th使用、後でtdに直す -->
+								<th>可</th> <!-- 文字のせいで一旦"th"使用 -->
 							</c:if>
 							<c:if test="${!empty n }">
 								<th>X</th>
@@ -104,14 +138,12 @@
 		</form>
 	</div>
 	</main>
-	
-	
 	<footer>
 		<ul>
 			<li><p>キム病院</p></li>
 			<li><a href="#">お知らせ</a></li>
 		</ul>
-
 	</footer>
+<script type="text/javascript" src="./js/common.js" ></script> 
 </body>
 </html>
