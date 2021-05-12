@@ -44,7 +44,6 @@
 	<h2>My予約状況</h2>
 	<div style="font-size:0;text-align:center; margin: 20px;">
 		<form action="getMyReservationListAction" method="POST">
-		<input type="hidden" name="userID" value="${user.userID }"/>
 		<select name="available">
 			<option value="0">診察済み</option>
 			<option value="1" selected>予約中</option>

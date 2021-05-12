@@ -42,7 +42,7 @@
 	</header>
 	<main>
 		<h2>予約変更</h2>
-		<form action="pushChangeTimeAction" method="POST">
+		<form action="updateDetailAction" method="POST">
 			<table border="1">
 				<thead>
 					<tr>
@@ -98,7 +98,7 @@
 						</td>
 						<td>
 							${reservation.date } 
-							<button name="changeTime" value="1">時間変更</button>
+							<button name="submit" value="1" onclick="setChangeTime()">時間変更</button>
 						</td>
 						<c:choose>
 							<c:when test="${reservation.available eq 1}">
@@ -112,8 +112,8 @@
 				</tbody>
 			</table>
 			<div class="low-btn">
-				<input type="submit" value="変更" />
-				<input type="button" value="キャンセル" onclick="deleted()"/>
+				<input type="button" value="戻る" onclick="history.back(-1);"/>
+				<input type="submit" name="submit" value="変更する" />
 			</div>
 			</form>
 	</main>

@@ -108,15 +108,11 @@
 									<td><strong>診察済み</strong></td>
 								</c:otherwise>
 							</c:choose>
-							
 						</tr> 
 						<input type="hidden" name="number" id="number"/>
 					</c:forEach>
 				</tbody>
 			</table>
-			<div class="low-btn">
-				<input type="button" value="キャンセル" onclick="deleted()"/>
-			</div>
 			</form>
 	</main>
 	<footer>

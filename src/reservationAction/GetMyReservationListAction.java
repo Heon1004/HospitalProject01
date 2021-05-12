@@ -16,13 +16,10 @@ import javax.servlet.http.HttpSession;
 import model.MedicineDAO;
 import model.ReservationBean;
 import model.ReservationDAO;
+import model.UserBean;
 
 @WebServlet("/getMyReservationListAction")
 public class GetMyReservationListAction extends HttpServlet {
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -31,13 +28,13 @@ public class GetMyReservationListAction extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		ReservationDAO dao = new ReservationDAO();
 		List<ReservationBean>reservationList = new ArrayList<ReservationBean>();
-		String userID = request.getParameter("userID");
+		UserBean user =  (UserBean) session.getAttribute("user");
 		int available = Integer.parseInt(request.getParameter("available"));
 		
 		if(available != 2) {
-			reservationList = dao.getReservationList(userID,available);
+			reservationList = dao.getReservationList(user.getUserID(),available);
 		}else if(available == 2){
-			reservationList = dao.getAllReservationList(userID);
+			reservationList = dao.getAllReservationList(user.getUserID());
 		}else { 
 			out.println("<script>");
 			out.println("alert('予約記録がありません。')");

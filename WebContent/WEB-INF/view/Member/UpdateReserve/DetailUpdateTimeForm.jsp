@@ -115,7 +115,8 @@
 			<div class="reserve">
 				<input type='date' name="date" id="currentDate" min="today"/>
 				<script>
-					document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
+					var setDate = "${reservation.date}".substring(0,10);
+					document.getElementById('currentDate').value = setDate;
 					let [today] = new Date().toISOString().split("T");
 					document.querySelector("input").setAttribute("min", today);
 				</script>
@@ -164,7 +165,8 @@
 						</tr>
 					</tbody>
 				</table>
-				<input type="submit" value="変更する" id="update-btn"/>
+				<input type="button" id="update-btn" value="戻る" onclick="history.back(-1);"/>
+				<button name="submit-btn" value="1" id="update-btn" onclick="setChangeTime()">変更する</button>
 			</div>
 		</form>
 	</div>

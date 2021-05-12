@@ -23,7 +23,6 @@ public class View extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String display = request.getParameter("display");
-		System.out.println(display);
 		String page = "/WEB-INF/view/";
 
 		switch (display) {

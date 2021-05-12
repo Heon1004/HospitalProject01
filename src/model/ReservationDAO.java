@@ -197,32 +197,32 @@ public class ReservationDAO {
 		return null;
 	}
 	
-	public int reserveCheck(String userID, String date) { //1日1回予約確認
-		String SQL = "SELECT * FROM Reservation WHERE userID = ? AND date LIKE ? AND available = 1";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DBconnection.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			pstmt.setString(2, date+"%");
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				return 0;
-			}
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				Close.close(conn, pstmt, rs);
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
-		return 0;
-	}
+//	public int reserveCheck(String userID, String date) { //1日1回予約確認
+//		String SQL = "SELECT * FROM Reservation WHERE userID = ? AND date LIKE ? AND available = 1";
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			conn = DBconnection.getConnection();
+//			pstmt = conn.prepareStatement(SQL);
+//			pstmt.setString(1, userID);
+//			pstmt.setString(2, date+"%");
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				return 0;
+//			}
+//			return 1;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				Close.close(conn, pstmt, rs);
+//			} catch (Exception e) {
+//				throw new RuntimeException(e.getMessage());
+//			}
+//		}
+//		return 0;
+//	}
 	
 	public int delete(ReservationBean reservation) throws SQLException {
 		String SQL = "UPDATE reservation SET available = 0 WHERE number = ?";
@@ -235,7 +235,7 @@ public class ReservationDAO {
 
 			pstmt.setInt(1, reservation.getNumber());
 			pstmt.executeUpdate();
-				conn.commit();
+			conn.commit();
 			return 1;
 		} catch (SQLException sqle) {
 			conn.rollback();
@@ -249,22 +249,27 @@ public class ReservationDAO {
 		} 
 	} 
 	
-	public int update(ReservationBean reservation) {
+	public int update(ReservationBean reservation) throws SQLException {
 		String SQL = "UPDATE reservation SET medicineCode = ?, date = ? WHERE number = ? AND userID = ? AND available = 1";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			
+			conn.setAutoCommit(false);
 			pstmt.setInt(1, reservation.getMedicineCode());
 			pstmt.setString(2, reservation.getDate());
 			pstmt.setInt(3, reservation.getNumber());
 			pstmt.setString(4, reservation.getUserID());
 			
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
+			int result = pstmt.executeUpdate();
+			if(result != 0) {
+				conn.commit();
+				return 1;
+			}
+		} catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
 		} finally {
 			try {
 				Close.close(conn, pstmt, null);

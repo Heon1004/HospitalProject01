@@ -121,7 +121,7 @@
 			<input type="submit" value="検索" id="search-btn"/>
 		</div>
 		<div>
-			<input type="hidden" name="medicine" value="${medicine }" />
+		<!-- 	<input type="hidden" name="medicineCode" value="${medicineCode }" /> -->
 			<input type="hidden" name="fulldate" value="${fulldate }" />
 				<table class="updateTime">
 				<caption>日付確認</caption>
@@ -145,7 +145,7 @@
 							<th rowspan="2">${date} </th>
 							<c:forEach var="n" items="${time }" >
 								<c:if test="${empty n}">
-									<th>可</th> <!-- 文字のせいで一旦"th"使用 -->
+									<th>可</th> 
 								</c:if>
 								<c:if test="${!empty n }">
 									<th>X</th>
@@ -164,7 +164,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<input type="submit" value="変更する" id="update-btn"/>
+				<button name="submit-btn" value="1" id="update-btn" onclick="setChangeTime()">変更する</button>
 			</div>
 		</form>
 	</div>
