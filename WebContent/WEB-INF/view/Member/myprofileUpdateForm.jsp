@@ -105,10 +105,6 @@
 		</form>
 	</main>
 	<footer>
-		<ul>
-			<li><p>キム病院</p></li>
-			<li><a href="#">お知らせ</a></li>
-		</ul>
 
 	</footer>
 <script type="text/javascript" src="./js/common.js" ></script> 

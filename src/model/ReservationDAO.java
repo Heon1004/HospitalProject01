@@ -279,4 +279,32 @@ public class ReservationDAO {
 		}
 		return -1;
 	} 
+	
+	public boolean nextPage(String userID, int available) {
+		String SQL = "SELECT count(date) FROM Reservation WHERE userID = ? available = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, available);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle.getMessage());
+		} finally {
+			try {
+				Close.close(conn, pstmt, null);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+		return false;
+	}
 }

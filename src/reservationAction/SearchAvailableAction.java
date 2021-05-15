@@ -29,8 +29,6 @@ public class SearchAvailableAction extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		ReservationBean reservation = (ReservationBean) session.getAttribute("reservation");
 		String submit = request.getParameter("submit-btn");
-		String formlink = request.getParameter("myform");
-		System.out.println(submit + "      link =" + formlink);
 		if(submit == null) {
 			int medicineCode = Integer.parseInt(request.getParameter("medicineCode")); //パラメータで持ってこないと検索した後診察科コードが更新ができない
 			String fulldate = request.getParameter("date");

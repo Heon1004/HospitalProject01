@@ -41,14 +41,9 @@
 		</nav>
 	</header>
 	<main>
-	${user.userName }
-	${user.userID }
+	<h2 style="text-align: center;">ようこそ、${user.userName }様</h2>
 	</main>
 	<footer>
-		<ul>
-			<li><p>キム病院</p></li>
-			<li><a href="#">お知らせ</a></li>
-		</ul>
 		
 	</footer>
 

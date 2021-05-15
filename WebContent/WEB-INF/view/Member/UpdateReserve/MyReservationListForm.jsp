@@ -67,7 +67,7 @@
 			<input type="submit" value="検索"/>
 		</form>
 	</div>
-		<form action=pushUpdateButtonAction method="POST">
+		<form action=pushUpdateButtonAction method="POST" name="action">
 			<table border="1">
 				<thead>
 					<tr>
@@ -78,9 +78,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="list" items="${reservationList }"  varStatus="st">
+					<c:forEach var="list" items="${pageList }"  varStatus="st">
 						<tr>
-							<td>${reservationList[st.index].number}</td>
+							<td>${pageList[st.index].number}</td>
 							<c:choose>
 								<c:when test="${list.medicineCode eq 1}">
 									<td>外科</td>
@@ -98,7 +98,7 @@
 									<td>相談</td>
 								</c:otherwise>
 							</c:choose>
-							<td>${list.date }</td>
+								<td>${pageList[st.index].date }</td>
 							<c:choose>
 								<c:when test="${list.available eq 1}">
 									<td><strong>予約中</strong></td>
@@ -109,17 +109,40 @@
 								</c:otherwise>
 							</c:choose>
 						</tr> 
-						<input type="hidden" name="number" id="number"/>
+						<input type="hidden" name="number" id="number"/> <!-- list番号を渡す -->
 					</c:forEach>
 				</tbody>
 			</table>
-			</form>
+		</form>
+		<form action="getMyReservationListAction" method="POST" name="action">
+		<input type="hidden" name="userID" value="${user.userID }"/>
+		<input type="hidden" name="available" value="${param.available }"/>
+		<c:set var="page" value="${p}"/>
+		<c:set var="startNum" value="${page-(page-1)%5 }"/>
+			<div class="page_wrap" style="text-align:center; padding: 30px 60px;">
+				<div class="page_nation">
+				<c:if test="${page >= 6}">
+					<span style="float: left;"><a href="?p=${startNum-1 }&available=${available}">←</a></span>
+				</c:if>
+				<c:if test="${startNum+5 < endPage}">
+					<c:forEach var="i" begin="0" end="4">
+						<input type="submit" name="p" value="${startNum+i }" />
+					</c:forEach>
+				</c:if>
+				<c:if test="${startNum+5 > endPage}">
+					<c:forEach var="i" begin="${startNum }" end="${endPage }">
+						<input type="submit" name="p" value="${i }" />
+					</c:forEach>
+				</c:if>
+				<c:if test="${startNum+5 <= endPage }">
+					<span style="float: right;"><a href="?p=${startNum+5 }&available=${available}">→</a></span>
+				</c:if>
+				</div>
+			</div>
+		</form>
 	</main>
 	<footer>
-		<ul>
-			<li><p>キム病院</p></li>
-			<li><a href="#">お知らせ</a></li>
-		</ul>
+		
 	</footer>
 <script type="text/javascript" src="./js/common.js" ></script> 
 </body>
