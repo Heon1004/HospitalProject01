@@ -121,53 +121,11 @@
 					document.querySelector("input").setAttribute("min", today);
 				</script>
 			<input type="submit" value="検索" id="search-btn"/>
+			<input type="hidden" name="fulldate" value="${fulldate }" />
 		</div>
 		<div>
-			<input type="hidden" name="fulldate" value="${fulldate }" />
-				<table class="updateTime">
-				<caption>日付確認</caption>
-					<thead>
-						<tr>
-							<th>日付</th>
-							<th colspan="2">09</th>
-							<th colspan="2">10</th>
-							<th colspan="2">11</th>
-							<th colspan="2">12</th>
-							<th colspan="2">13</th>
-							<th colspan="2">14</th>
-							<th colspan="2">15</th>
-							<th colspan="2">16</th>
-							<th colspan="2">17</th>
-							<th colspan="2">18</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th rowspan="2">${date} </th>
-							<c:forEach var="n" items="${time }" >
-								<c:if test="${empty n}">
-									<th>可</th> 
-								</c:if>
-								<c:if test="${!empty n }">
-									<th>X</th>
-								</c:if>
-							</c:forEach>
-							</tr>
-							<tr>
-							<c:forEach var="n" items="${time }" varStatus="st">
-								<c:if test="${empty n}" >
-									<th><input type="radio" name="checked" value="${st.index }" /></th>
-								</c:if>
-								<c:if test="${!empty n}">
-									<th>X</th>
-								</c:if>
-							</c:forEach>
-						</tr>
-					</tbody>
-				</table>
-				<input type="button" id="update-btn" value="戻る" onclick="history.back(-1);"/>
-				<button name="submit-btn" value="1" id="update-btn" onclick="setChangeTime()">変更する</button>
-			</div>
+			<input type="button" id="update-btn" value="戻る" onclick="history.back(-1);"/>
+		</div>
 		</form>
 	</div>
 	</main>

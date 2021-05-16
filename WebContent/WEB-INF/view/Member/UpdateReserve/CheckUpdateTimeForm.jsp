@@ -44,7 +44,7 @@
 	<main>
 	<h2>予約時間変更</h2>
 	<div class="info">
-		<form action="searchAvailableAction" method="POST">
+		<form action="searchAvailableAction" method="POST" name="action">
 			<table border="1">
 				<thead>
 					<tr>
@@ -119,12 +119,11 @@
 					document.querySelector("input").setAttribute("min", today);
 				</script>
 			<input type="submit" value="検索" id="search-btn"/>
-		</div>
-		<div>
-		<!-- 	<input type="hidden" name="medicineCode" value="${medicineCode }" /> -->
 			<input type="hidden" name="fulldate" value="${fulldate }" />
+			</div>
+			<div>
 				<table class="updateTime">
-				<caption>日付確認</caption>
+					<caption>日付確認</caption>
 					<thead>
 						<tr>
 							<th>日付</th>
@@ -142,7 +141,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<th rowspan="2">${date} </th>
+							<th rowspan="2">${fulldate} </th>
 							<c:forEach var="n" items="${time }" >
 								<c:if test="${empty n}">
 									<th>可</th> 
@@ -151,8 +150,8 @@
 									<th>X</th>
 								</c:if>
 							</c:forEach>
-							</tr>
-							<tr>
+						</tr>
+						<tr>
 							<c:forEach var="n" items="${time }" varStatus="st">
 								<c:if test="${empty n}" >
 									<th><input type="radio" name="checked" value="${st.index }" /></th>
@@ -164,7 +163,10 @@
 						</tr>
 					</tbody>
 				</table>
-				<button name="submit-btn" value="1" id="update-btn" onclick="setChangeTime()">変更する</button>
+				<div style="margin-top: 20px;">
+					<input type="button" value="戻る" onclick="history.back(-1);"/>
+					<button name="submit-btn" value="1">変更する</button>
+				</div>
 			</div>
 		</form>
 	</div>

@@ -41,13 +41,9 @@ function getNumber(reservationNumber){
 	
 }
 
-function setChangeTime(){ 
-	document.getElementById("changeTime").value = "1";
-	
-}
+
 
 function getPage(num){ 
 	document.getElementById("pageNum").value = num;
 }
-
 

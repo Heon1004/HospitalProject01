@@ -124,7 +124,7 @@
 				<c:if test="${page >= 6}">
 					<span style="float: left;"><a href="?p=${startNum-1 }&available=${available}">←</a></span>
 				</c:if>
-				<c:if test="${startNum+5 < endPage}">
+				<c:if test="${startNum+5 <= endPage}">
 					<c:forEach var="i" begin="0" end="4">
 						<input type="submit" name="p" value="${startNum+i }" />
 					</c:forEach>

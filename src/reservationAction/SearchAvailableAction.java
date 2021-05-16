@@ -20,6 +20,10 @@ import model.UserBean;
 
 @WebServlet("/searchAvailableAction") //予約時間変更で日付を検索するアクション
 public class SearchAvailableAction extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,9 +39,15 @@ public class SearchAvailableAction extends HttpServlet{
 			String date = fulldate.substring(0, 10); // 2021-05-12 00:00:00 //日付の検索をした後、キャレンダー日付を設定するため
 			ReservationDAO dao = new ReservationDAO(); 
 			List<String>infolist = new ArrayList<String>();
+			String[] time;
 	
 			infolist = dao.reserveCheckList(date, medicineCode); //DateTimeを全部入れる
-			String[] time = TimeCheck.timeCheck(infolist); //何時に予約があるか分別 0 0 1 0 だと10:00時
+			if(dao.getTodayDate().substring(0, 10).equals(date)) { //if it's today
+				time = TimeCheck.timeCheck(infolist); //何時に予約があるか分別
+				time = TimeCheck.setNow(time); //今日の日付を設定し、過ぎた時間にxを差し入れる
+			}else {
+				time = TimeCheck.timeCheck(infolist);
+			}
 			date = fulldate.substring(5,10); //日付
 			session.setAttribute("date", date);
 			session.setAttribute("time", time);

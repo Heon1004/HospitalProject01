@@ -111,7 +111,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="low-btn">
+			<div style="text-align: center; margin-top: 20px;">
 				<input type="button" value="戻る" onclick="history.back(-1);"/>
 				<input type="submit" name="submit" value="変更する" />
 			</div>

@@ -307,4 +307,28 @@ public class ReservationDAO {
 		}
 		return false;
 	}
+	public String getTodayDate() {
+		String SQL = "SELECT NOW()";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+			
+		} catch (SQLException sqle) {
+			throw new RuntimeException(sqle.getMessage());
+		} finally {
+			try {
+				Close.close(conn, pstmt, null);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+		return "";
+	}
 }

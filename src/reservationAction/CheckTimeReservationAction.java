@@ -22,21 +22,21 @@ public class CheckTimeReservationAction extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		List<String>infolist = new ArrayList<String>();
 		HttpSession session = request.getSession(true);
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		
 		if(!request.getParameter("date").equals("") && request.getParameter("date") != null && 
 				!request.getParameter("medicine").equals("") && request.getParameter("medicine") != null) {
 			int medicine = Integer.parseInt(request.getParameter("medicine")); 
 			String fulldate = request.getParameter("date");
 			String date = fulldate.substring(0, 10); // 2021-05-12 00:00:00 //日付の検索をした後、キャレンダー日付を設定するため
-			
+			String[] time;
 			
 			ReservationDAO dao = new ReservationDAO(); 
 			infolist = dao.reserveCheckList(date, medicine); //DateTimeを全部入れる
-			//何時に予約があるか分別
-			
-			String[] time = TimeCheck.timeCheck(infolist);
+			if(dao.getTodayDate().substring(0, 10).equals(date)) { //if it's today
+				time = TimeCheck.timeCheck(infolist); //何時に予約があるか分別
+				time = TimeCheck.setNow(time); //今日の日付を設定し、過ぎた時間にxを差し入れる
+			}else {
+				time = TimeCheck.timeCheck(infolist);
+			}
 			
 			date = fulldate.substring(5,10); //日付
 			
@@ -46,11 +46,6 @@ public class CheckTimeReservationAction extends HttpServlet{
 			request.setAttribute("medicine", medicine);	//予約する時診察科コードを引き渡すため
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/Member/Reserve/ReservationForm.jsp");
 			dispatcher.forward(request, response);
-		}else {
-			out.println("<script>");
-			out.println("alert('選択されてない項目があります。')");
-			out.println("history.back();");
-			out.println("</script>");	
 		}
 		
 	}

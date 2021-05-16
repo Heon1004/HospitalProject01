@@ -41,7 +41,12 @@
 		</nav>
 	</header>
 	<main>
+	<c:if test="${!empty user }">
 	<h2 style="text-align: center;">ようこそ、${user.userName }様</h2>
+	</c:if>
+	<c:if test="${empty user }">
+	<h2 style="text-align: center;"><a href="./view?display=loginForm">ログインはこちら</a></h2>
+	</c:if>
 	</main>
 	<footer>
 		
